@@ -1,0 +1,39 @@
+name: Deploy Weather Web App to Home Server
+
+# Menjalankan workflow otomatis setiap kali ada event push ke branch 'main'
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Mengizinkan trigger deploy manual langsung dari dashboard GitHub
+
+jobs:
+  deploy:
+    name: Deploy to dell-server (Nginx)
+    runs-on: [self-hosted, linux, dell-server] # Dieksekusi langsung oleh runner di home server
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🚀 Update File ke Web Server
+        run: |
+          echo "Memperbarui aset di /opt/weather-app..."
+          cp -f index.html style.css script.js /opt/weather-app/
+          echo "File berhasil disalin ke direktori produksi!"
+
+      - name: 🔄 Reload Nginx
+        run: |
+          echo 231006 | sudo -S systemctl reload nginx
+          echo "Nginx server block berhasil di-reload."
+
+      - name: ✅ Health Check Endpoint
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8091)
+          echo "Status Code Port 8091: $STATUS"
+          if [ "$STATUS" -eq 200 ]; then
+            echo "Deployment Sukses! Weather Web App live di https://weather.yogitrim.my.id"
+          else
+            echo "Gagal: Endpoint mengembalikan status $STATUS"
+            exit 1
+          fi
