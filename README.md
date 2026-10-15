@@ -46,22 +46,8 @@ Weather APPS/
 
 ---
 
-## 💻 Cara Menjalankan Secara Lokal
-
-1. Clone repositori ini:
-   ```bash
-   git clone https://github.com/yogitm/weather-web-app.git
-   cd weather-web-app
-   ```
-2. Buka `index.html` langsung di browser, atau jalankan menggunakan server lokal:
-   ```bash
-   python3 -m http.server 3000
-   ```
-3. Buka browser di [http://localhost:3000](http://localhost:3000).
-
----
-
 ## 👤 Pembuat
-- **Nama**: Yogi Trimario Panjaitan
+- **Nama**: Yogi Tri Medya Panjaitan
+- **NIM**: 11S24023
 - **Akun GitHub**: [@yogitm](https://github.com/yogitm)
 - **Institusi**: Institut Teknologi Del (IT Del)
