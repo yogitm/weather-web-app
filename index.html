@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Weather Web App - Aplikasi prakiraan cuaca real-time yang bersih, akurat, dan responsif dengan integrasi REST API.">
+  <meta name="description"
+    content="Weather Web App - Aplikasi prakiraan cuaca real-time yang bersih, akurat, dan responsif dengan integrasi REST API.">
   <title>Weather Web App | Prakiraan Cuaca Real-Time</title>
-  
+
   <!-- Google Fonts: Plus Jakarta Sans for Modern Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
   <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <!-- Centered Application Container -->
   <main class="app-container">
@@ -21,16 +25,17 @@
     <!-- 1. Header Aplikasi -->
     <header class="app-header">
       <div class="logo-badge" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-icon">
-          <circle cx="12" cy="12" r="4"/>
-          <path d="M12 2v2"/>
-          <path d="M12 20v2"/>
-          <path d="m4.93 4.93 1.41 1.41"/>
-          <path d="m17.66 17.66 1.41 1.41"/>
-          <path d="M2 12h2"/>
-          <path d="M20 12h2"/>
-          <path d="m6.34 17.66-1.41 1.41"/>
-          <path d="m19.07 4.93-1.41 1.41"/>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" class="header-icon">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2" />
+          <path d="M12 20v2" />
+          <path d="m4.93 4.93 1.41 1.41" />
+          <path d="m17.66 17.66 1.41 1.41" />
+          <path d="M2 12h2" />
+          <path d="M20 12h2" />
+          <path d="m6.34 17.66-1.41 1.41" />
+          <path d="m19.07 4.93-1.41 1.41" />
         </svg>
       </div>
       <h1 class="app-title">Weather Web App</h1>
@@ -41,32 +46,27 @@
     <form id="search-form" class="search-form" role="search" novalidate>
       <label for="city-input" class="visually-hidden">Masukkan nama kota</label>
       <div class="search-input-wrapper">
-        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="11" cy="11" r="8"/>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
-        <input 
-          type="text" 
-          id="city-input" 
-          name="city"
-          required 
-          placeholder="Masukkan nama kota (misal: Jakarta, Balige, Tokyo)..." 
-          autocomplete="off"
-          spellcheck="false"
-        >
+        <input type="text" id="city-input" name="city" required
+          placeholder="Masukkan nama kota (misal: Jakarta, Balige, Tokyo)..." autocomplete="off" spellcheck="false">
       </div>
       <button type="submit" id="search-btn" class="search-btn" aria-label="Cari data cuaca kota">
         <span class="btn-text">Cari Cuaca</span>
-        <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="5" y1="12" x2="19" y2="12"/>
-          <polyline points="12 5 19 12 12 19"/>
+        <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <polyline points="12 5 19 12 12 19" />
         </svg>
       </button>
     </form>
 
     <!-- 3. Feedback States (Loading Indicator & Error Banner) -->
     <section id="feedback-container" class="feedback-container" aria-live="polite">
-      
+
       <!-- Loading Indicator (CSS Spinner) -->
       <div id="loading-state" class="loading-state hidden">
         <div class="spinner-ring" role="status" aria-label="Sedang memuat data"></div>
@@ -76,10 +76,11 @@
       <!-- Error Banner -->
       <div id="error-state" class="error-state hidden" role="alert">
         <div class="error-icon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="12" y1="8" x2="12" y2="12"/>
-            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
           </svg>
         </div>
         <div class="error-content">
@@ -93,13 +94,14 @@
     <!-- 4. Primary Weather Display (Dimuat Dinamis) -->
     <section id="weather-display" class="weather-display hidden" aria-live="polite">
       <article class="weather-card">
-        
+
         <!-- Header Kartu Cuaca: Lokasi & Waktu Pembaruan -->
         <header class="card-header">
           <div class="location-badge">
-            <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-              <circle cx="12" cy="10" r="3"/>
+            <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
             </svg>
             <h2 id="city-name" class="city-name">-</h2>
           </div>
@@ -122,12 +124,13 @@
 
         <!-- 5. Secondary Metrics Panel (Grid 2 Kolom) -->
         <div class="secondary-metrics-panel">
-          
+
           <!-- Kolom 1: Kelembapan (Humidity) -->
           <div class="metric-card">
             <div class="metric-icon humidity-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
               </svg>
             </div>
             <div class="metric-info">
@@ -139,8 +142,10 @@
           <!-- Kolom 2: Kecepatan Angin (Wind Speed) -->
           <div class="metric-card">
             <div class="metric-icon wind-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2" />
               </svg>
             </div>
             <div class="metric-info">
@@ -156,8 +161,9 @@
 
     <!-- Footer Aplikasi -->
     <footer class="app-footer">
-      <p>Data cuaca real-time disediakan oleh <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo API</a></p>
-      <p class="copyright">&copy; 2026 Weather Web App • PABWE</p>
+      <p>Data cuaca real-time disediakan oleh <a href="https://open-meteo.com/" target="_blank"
+          rel="noopener noreferrer">Open-Meteo API</a></p>
+      <p class="copyright">&copy; 2026 Weather Web App • Yogi TriM</p>
     </footer>
 
   </main>
@@ -165,4 +171,5 @@
   <!-- Script Logic -->
   <script src="script.js"></script>
 </body>
+
 </html>
